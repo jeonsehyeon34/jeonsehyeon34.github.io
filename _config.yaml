@@ -1,0 +1,4 @@
+# _config.yml
+title: King's Study Log
+description: 포스코 AI·빅데이터 아카데미 준비 기록
+theme: jekyll-theme-minimal   # 가장 단순한 기본 테마
