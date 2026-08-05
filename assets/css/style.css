@@ -1,0 +1,227 @@
+:root{
+  --bg:#fafaf8;
+  --card:#ffffff;
+  --border:#e7e5df;
+  --text:#1c1c1a;
+  --text-sub:#6b6a63;
+  --text-mute:#a8a69d;
+  --accent:#2f5d50;
+  --accent-bg:#e7f0ec;
+  --accent-strong:#1e4038;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  line-height:1.6;
+}
+header{
+  max-width:920px;
+  margin:0 auto;
+  padding:40px 20px 20px;
+}
+header h1{
+  font-size:22px;
+  font-weight:700;
+  margin:0 0 4px;
+  letter-spacing:-0.02em;
+}
+header p{
+  font-size:13px;
+  color:var(--text-sub);
+  margin:0 0 18px;
+}
+.progress-wrap{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.progress-track{
+  flex:1;
+  height:6px;
+  background:var(--border);
+  border-radius:99px;
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  background:var(--accent);
+  border-radius:99px;
+}
+.progress-label{
+  font-size:12px;
+  font-weight:600;
+  color:var(--accent-strong);
+  white-space:nowrap;
+}
+
+.layout{
+  max-width:920px;
+  margin:0 auto;
+  padding:0 20px 80px;
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:24px;
+  align-items:start;
+}
+
+.calendar{
+  position:sticky;
+  top:20px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+}
+.calendar-title{
+  font-size:13px;
+  font-weight:700;
+  margin:0 0 12px;
+}
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:5px;
+}
+.calendar-grid a, .calendar-grid span{
+  aspect-ratio:1/1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  border-radius:6px;
+  text-decoration:none;
+  color:var(--text-mute);
+  background:var(--bg);
+}
+.calendar-grid a.done{
+  background:var(--accent-bg);
+  color:var(--accent-strong);
+  font-weight:600;
+}
+.calendar-grid a.done:hover{
+  background:var(--accent);
+  color:#fff;
+}
+.calendar-grid a.active{
+  background:var(--accent);
+  color:#fff;
+  font-weight:700;
+}
+.calendar-legend{
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid var(--border);
+  font-size:11px;
+  color:var(--text-mute);
+}
+.calendar-legend div{margin-bottom:4px;display:flex;align-items:center;gap:6px;}
+.dot{width:8px;height:8px;border-radius:2px;display:inline-block;}
+.dot.done{background:var(--accent-bg);border:1px solid var(--accent);}
+.dot.todo{background:var(--bg);border:1px solid var(--border);}
+
+.feed{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.post{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  scroll-margin-top:20px;
+}
+.post-head{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  margin-bottom:16px;
+}
+.post-day{
+  font-size:17px;
+  font-weight:700;
+}
+.post-meta{
+  font-size:12px;
+  color:var(--text-sub);
+}
+
+.section-label{
+  font-size:11px;
+  font-weight:700;
+  color:var(--text-mute);
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  margin:0 0 8px;
+}
+.section{margin-bottom:16px;}
+.section:last-child{margin-bottom:0;}
+
+.today-list{
+  background:var(--bg);
+  border-radius:10px;
+  padding:12px 14px;
+}
+.today-list ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.today-list li{
+  font-size:14px;
+  padding:3px 0;
+  display:flex;
+  gap:8px;
+}
+.today-list li::before{
+  content:"·";
+  color:var(--accent);
+  font-weight:700;
+}
+
+.media-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:8px;
+}
+.media-box{
+  aspect-ratio:4/3;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.attendance{
+  display:flex;
+  gap:10px;
+}
+.attend-box{
+  flex:1;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+}
+.attend-box .label{
+  font-size:10px;
+  color:var(--text-mute);
+  margin-bottom:4px;
+}
+.attend-box .time{
+  font-size:15px;
+  font-weight:700;
+  color:var(--accent-strong);
+}
+
+@media (max-width:640px){
+  .layout{grid-template-columns:1fr;}
+  .calendar{position:static;}
+  .calendar-grid{grid-template-columns:repeat(7,1fr);}
+}
