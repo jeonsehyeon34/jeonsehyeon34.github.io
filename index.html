@@ -58,7 +58,7 @@ layout: none
       <article class="post" id="day{{ post_day }}">
         <div class="post-head">
           <span class="post-day">Day {{ post_day }}</span>
-          <span class="post-meta">{{ post.date | date: "%Y.%m.%d" }} · {{ post.start_time }}–{{ post.end_time }}</span>
+          <span class="post-meta">{{ post.date | date: "%Y.%m.%d" }}{% if post.start_time %} · {{ post.start_time }}–{{ post.end_time }}{% endif %}</span>
         </div>
 
         <div class="section">
@@ -77,6 +77,7 @@ layout: none
         </div>
         {% endif %}
 
+        {% if post.start_time %}
         <div class="section">
           <p class="section-label">출결 인증</p>
           <div class="attendance">
@@ -92,6 +93,7 @@ layout: none
             </div>
           </div>
         </div>
+        {% endif %}
       </article>
     {% endfor %}
   </div>
