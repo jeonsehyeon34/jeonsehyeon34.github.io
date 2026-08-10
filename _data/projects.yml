@@ -1,0 +1,14 @@
+items:
+  - name: "K-Health 미개방 의료데이터 활용 경진대회"
+    deadline: "2026-08-14 예선 마감"
+    checklist:
+      - label: "데이터셋 후보 조사 (23개 훑어보기)"
+        done: true
+      - label: "데이터셋 최종 선정 (어지럼증 검사)"
+        done: true
+      - label: "아이디어 제안서 초안 작성"
+        done: true
+      - label: "제안서 다듬기 및 제출"
+        done: false
+      - label: "예선 결과 확인"
+        done: false

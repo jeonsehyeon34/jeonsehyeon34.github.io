@@ -1,0 +1,59 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프로젝트 진행도 - study-log 2026</title>
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="{{ '/' | relative_url }}">홈</a>
+  <a href="{{ '/blog.html' | relative_url }}">포스트</a>
+  <a href="{{ '/projects.html' | relative_url }}" class="active">프로젝트</a>
+</nav>
+
+<header>
+  <h1>프로젝트 진행도</h1>
+  <p>진행 중인 프로젝트와 체크리스트</p>
+</header>
+
+<div class="projects">
+  {% for project in site.data.projects.items %}
+    {% assign total = project.checklist.size %}
+    {% assign done = 0 %}
+    {% for item in project.checklist %}
+      {% if item.done %}{% assign done = done | plus: 1 %}{% endif %}
+    {% endfor %}
+    {% if total > 0 %}
+      {% assign percent = done | times: 100 | divided_by: total %}
+    {% else %}
+      {% assign percent = 0 %}
+    {% endif %}
+    <div class="project-card">
+      <div class="project-head">
+        <h2>{{ project.name }}</h2>
+        {% if project.deadline %}<span class="project-deadline">{{ project.deadline }}</span>{% endif %}
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" style="width: {{ percent }}%;"></div></div>
+        <span class="progress-label">{{ done }} / {{ total }}</span>
+      </div>
+      <ul class="checklist">
+        {% for item in project.checklist %}
+          <li class="{% if item.done %}checked{% endif %}">
+            <span class="check-box">{% if item.done %}✓{% endif %}</span>
+            <span class="check-label">{{ item.label }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
+</div>
+
+</body>
+</html>

@@ -20,6 +20,7 @@ collections:
       - { label: "Day Number", name: "day_number", widget: "number", hint: "used only for the filename, e.g. 6 -> day6" }
       - { label: "Start Time", name: "start_time", widget: "string", required: false, hint: "예: 09:00 (도서관 출근이 없는 날은 비워두세요)" }
       - { label: "End Time", name: "end_time", widget: "string", required: false }
+      - { label: "Quote", name: "quote", widget: "string", required: false, hint: "오늘의 명언 한줄 (선택)" }
       - { label: "Start Photo", name: "start_photo", widget: "image", required: false }
       - { label: "End Photo", name: "end_photo", widget: "image", required: false }
       - label: "Media"
@@ -28,3 +29,26 @@ collections:
         required: false
         field: { label: "Image", name: "image", widget: "image" }
       - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "projects"
+    label: "Projects"
+    files:
+      - name: "projects"
+        label: "Project Checklist"
+        file: "_data/projects.yml"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            label_singular: "Project"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Project Name", name: "name", widget: "string" }
+              - { label: "Deadline / Note", name: "deadline", widget: "string", required: false }
+              - label: "Checklist"
+                name: "checklist"
+                widget: "list"
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: "Item", name: "label", widget: "string" }
+                  - { label: "Done", name: "done", widget: "boolean", default: false }
