@@ -8,6 +8,7 @@ layout: none
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>study-log 2026</title>
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap">
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
@@ -16,7 +17,6 @@ layout: none
 {% assign end_ts = site.data.plan.end_date | date: "%s" %}
 {% assign total_days = end_ts | minus: start_ts | divided_by: 86400 | plus: 1 %}
 {% assign done_count = site.posts.size %}
-{% assign percent = done_count | times: 100 | divided_by: total_days %}
 
 <nav class="topnav">
   <a href="{{ '/' | relative_url }}">홈</a>
@@ -26,37 +26,21 @@ layout: none
 
 <header>
   <h1>study-log 2026</h1>
-  <p>포스코 AI·빅데이터 아카데미 준비 기록</p>
-  <div class="progress-wrap">
-    <div class="progress-track"><div class="progress-fill progress-fill-live" style="width: {{ percent }}%;"></div></div>
-    <span class="progress-label">Day {{ done_count }} / {{ total_days }}</span>
+  <p>포스코 AI·빅데이터 아카데미 준비 기록 · Day {{ done_count }} / {{ total_days }}</p>
+  <div class="tally">
+    {% for n in (1..total_days) %}
+      {% assign found = false %}
+      {% for post in site.posts %}
+        {% assign post_ts = post.date | date: "%s" %}
+        {% assign post_day = post_ts | minus: start_ts | divided_by: 86400 | plus: 1 %}
+        {% if post_day == n %}{% assign found = true %}{% endif %}
+      {% endfor %}
+      {% if found %}<i class="on" title="Day {{ n }}"></i>{% else %}<i title="Day {{ n }}"></i>{% endif %}
+    {% endfor %}
   </div>
 </header>
 
 <div class="layout">
-
-  <nav class="calendar">
-    <p class="calendar-title">진행 현황</p>
-    <div class="calendar-grid">
-      {% for n in (1..total_days) %}
-        {% assign found = false %}
-        {% for post in site.posts %}
-          {% assign post_ts = post.date | date: "%s" %}
-          {% assign post_day = post_ts | minus: start_ts | divided_by: 86400 | plus: 1 %}
-          {% if post_day == n %}{% assign found = true %}{% endif %}
-        {% endfor %}
-        {% if found %}
-          <a href="#day{{ n }}" class="done">{{ n }}</a>
-        {% else %}
-          <span>{{ n }}</span>
-        {% endif %}
-      {% endfor %}
-    </div>
-    <div class="calendar-legend">
-      <div><span class="dot done"></span>기록 완료</div>
-      <div><span class="dot todo"></span>예정</div>
-    </div>
-  </nav>
 
   <div class="feed">
     {% for post in site.posts %}
@@ -66,6 +50,13 @@ layout: none
         <div class="post-head">
           <span class="post-day">Day {{ post_day }}</span>
           <span class="post-meta">{{ post.date | date: "%Y.%m.%d" }}{% if post.start_time %} · {{ post.start_time }}–{{ post.end_time }}{% endif %}</span>
+          {% if post.project %}
+            {% for project in site.data.projects.items %}
+              {% if project.id == post.project %}
+                <a class="post-project-tag" href="{{ '/projects.html' | relative_url }}#project-{{ project.id }}">{{ project.name }}</a>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
         </div>
 
         {% if post.quote %}
@@ -108,8 +99,27 @@ layout: none
       </article>
     {% endfor %}
   </div>
+
+  <aside class="project-sidebar">
+    <p class="sidebar-title">진행 중인 프로젝트</p>
+    {% for project in site.data.projects.items %}
+      {% assign total = project.checklist.size %}
+      {% assign done = 0 %}
+      {% for item in project.checklist %}
+        {% if item.done %}{% assign done = done | plus: 1 %}{% endif %}
+      {% endfor %}
+      <a class="sidebar-project" href="{{ '/projects.html' | relative_url }}#project-{{ project.id }}">
+        <span class="sidebar-project-name">{{ project.name }}</span>
+        <span class="tally sm">
+          {% for item in project.checklist %}
+            {% if item.done %}<i class="on"></i>{% else %}<i></i>{% endif %}
+          {% endfor %}
+        </span>
+        <span class="sidebar-project-meta">{{ done }}/{{ total }}{% if project.deadline %} · {{ project.deadline }}{% endif %}</span>
+      </a>
+    {% endfor %}
+  </aside>
 </div>
 
-<script src="{{ '/assets/js/calendar.js' | relative_url }}"></script>
 </body>
 </html>

@@ -21,6 +21,7 @@ collections:
       - { label: "Start Time", name: "start_time", widget: "string", required: false, hint: "예: 09:00 (도서관 출근이 없는 날은 비워두세요)" }
       - { label: "End Time", name: "end_time", widget: "string", required: false }
       - { label: "Quote", name: "quote", widget: "string", required: false, hint: "오늘의 명언 한줄 (선택)" }
+      - { label: "Project ID", name: "project", widget: "string", required: false, hint: "오늘 작업한 프로젝트의 ID (Projects 항목의 ID와 동일하게), 예: k-health" }
       - { label: "Start Photo", name: "start_photo", widget: "image", required: false }
       - { label: "End Photo", name: "end_photo", widget: "image", required: false }
       - label: "Media"
@@ -43,6 +44,7 @@ collections:
             label_singular: "Project"
             summary: "{{fields.name}}"
             fields:
+              - { label: "ID (slug)", name: "id", widget: "string", hint: "포스트에서 이 프로젝트를 연결할 때 쓰는 짧은 영문 코드, 예: k-health" }
               - { label: "Project Name", name: "name", widget: "string" }
               - { label: "Deadline / Note", name: "deadline", widget: "string", required: false }
               - { label: "Description", name: "description", widget: "text", required: false }
