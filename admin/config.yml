@@ -45,6 +45,12 @@ collections:
             fields:
               - { label: "Project Name", name: "name", widget: "string" }
               - { label: "Deadline / Note", name: "deadline", widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - label: "Photos"
+                name: "photos"
+                widget: "list"
+                required: false
+                field: { label: "Photo", name: "image", widget: "image" }
               - label: "Checklist"
                 name: "checklist"
                 widget: "list"

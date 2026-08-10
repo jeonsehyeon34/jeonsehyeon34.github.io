@@ -20,7 +20,7 @@ layout: none
 
 <header>
   <h1>프로젝트 진행도</h1>
-  <p>진행 중인 프로젝트와 체크리스트</p>
+  <p>진행 중인 프로젝트와 체크리스트 — 클릭해서 펼쳐보세요</p>
 </header>
 
 <div class="projects">
@@ -35,24 +35,41 @@ layout: none
     {% else %}
       {% assign percent = 0 %}
     {% endif %}
-    <div class="project-card">
-      <div class="project-head">
-        <h2>{{ project.name }}</h2>
-        {% if project.deadline %}<span class="project-deadline">{{ project.deadline }}</span>{% endif %}
+    <details class="project">
+      <summary class="project-summary">
+        <span class="project-summary-top">
+          <span class="project-name">{{ project.name }}</span>
+          {% if project.deadline %}<span class="project-deadline">{{ project.deadline }}</span>{% endif %}
+        </span>
+        <span class="project-summary-bar">
+          <span class="progress-track"><span class="progress-fill progress-fill-live" style="width: {{ percent }}%;"></span></span>
+          <span class="progress-label">{{ done }} / {{ total }}</span>
+        </span>
+      </summary>
+
+      <div class="project-body">
+        {% if project.description %}
+        <p class="project-description">{{ project.description }}</p>
+        {% endif %}
+
+        {% if project.photos and project.photos.size > 0 %}
+        <div class="media-grid project-photos">
+          {% for p in project.photos %}
+            <div class="media-box"><img src="{{ p }}" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <ul class="checklist">
+          {% for item in project.checklist %}
+            <li class="{% if item.done %}checked{% endif %}">
+              <span class="check-box">{% if item.done %}✓{% endif %}</span>
+              <span class="check-label">{{ item.label }}</span>
+            </li>
+          {% endfor %}
+        </ul>
       </div>
-      <div class="progress-wrap">
-        <div class="progress-track"><div class="progress-fill" style="width: {{ percent }}%;"></div></div>
-        <span class="progress-label">{{ done }} / {{ total }}</span>
-      </div>
-      <ul class="checklist">
-        {% for item in project.checklist %}
-          <li class="{% if item.done %}checked{% endif %}">
-            <span class="check-box">{% if item.done %}✓{% endif %}</span>
-            <span class="check-label">{{ item.label }}</span>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+    </details>
   {% endfor %}
 </div>
 
