@@ -1,0 +1,7 @@
+name = "jeonsehyeon34-cms-oauth"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# Secrets (do NOT put values here):
+#   wrangler secret put GITHUB_CLIENT_ID
+#   wrangler secret put GITHUB_CLIENT_SECRET

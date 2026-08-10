@@ -1,0 +1,30 @@
+backend:
+  name: github
+  repo: jeonsehyeon34/jeonsehyeon34.github.io
+  branch: main
+  base_url: https://jeonsehyeon34-cms-oauth.cms-oauth-worker.workers.dev
+  auth_endpoint: auth
+
+media_folder: "assets/log"
+public_folder: "/assets/log"
+
+collections:
+  - name: "posts"
+    label: "Study Log"
+    folder: "_posts"
+    create: true
+    format: "frontmatter"
+    slug: "{{year}}-{{month}}-{{day}}-day{{fields.day_number}}"
+    fields:
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Day Number", name: "day_number", widget: "number", hint: "used only for the filename, e.g. 6 -> day6" }
+      - { label: "Start Time", name: "start_time", widget: "string", required: false, hint: "예: 09:00 (도서관 출근이 없는 날은 비워두세요)" }
+      - { label: "End Time", name: "end_time", widget: "string", required: false }
+      - { label: "Start Photo", name: "start_photo", widget: "image", required: false }
+      - { label: "End Photo", name: "end_photo", widget: "image", required: false }
+      - label: "Media"
+        name: "media"
+        widget: "list"
+        required: false
+        field: { label: "Image", name: "image", widget: "image" }
+      - { label: "Body", name: "body", widget: "markdown" }
