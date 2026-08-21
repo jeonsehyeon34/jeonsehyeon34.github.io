@@ -79,19 +79,19 @@ layout: none
         </div>
         {% endif %}
 
-        {% if post.start_time %}
+        {% if post.start_photo %}
         <div class="section">
           <p class="section-label">출결 인증</p>
           <div class="attendance">
             <div class="attend-box">
               <div class="label">출근</div>
               <img src="{{ post.start_photo }}" alt="" style="width:100%;border-radius:6px;margin-bottom:4px;">
-              <div class="time">{{ post.start_time }}</div>
+              {% if post.start_time %}<div class="time">{{ post.start_time }}</div>{% endif %}
             </div>
             <div class="attend-box">
               <div class="label">퇴근</div>
               <img src="{{ post.end_photo }}" alt="" style="width:100%;border-radius:6px;margin-bottom:4px;">
-              <div class="time">{{ post.end_time }}</div>
+              {% if post.end_time %}<div class="time">{{ post.end_time }}</div>{% endif %}
             </div>
           </div>
         </div>
