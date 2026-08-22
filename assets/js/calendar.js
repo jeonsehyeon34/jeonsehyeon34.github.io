@@ -20,8 +20,26 @@
     render();
   }
 
-  const ghchartWrap = document.querySelector('.ghchart-wrap');
-  if (ghchartWrap) {
-    ghchartWrap.scrollLeft = ghchartWrap.scrollWidth;
+  const ghgrid = document.getElementById('ghgrid');
+  if (ghgrid) {
+    const username = ghgrid.getAttribute('data-username');
+    fetch('https://github-contributions-api.jogruber.de/v4/' + username + '?y=last')
+      .then(res => res.json())
+      .then(data => {
+        const days = (data.contributions || []).slice(-98); // ~14 weeks
+        const weeks = [];
+        for (let i = 0; i < days.length; i += 7) {
+          weeks.push(days.slice(i, i + 7));
+        }
+        ghgrid.innerHTML = weeks.map(week => {
+          const cells = week.map(d =>
+            `<span class="ghgrid-cell l${d.level}" title="${d.date}: ${d.count}커밋"></span>`
+          ).join('');
+          return `<span class="ghgrid-col">${cells}</span>`;
+        }).join('');
+      })
+      .catch(() => {
+        ghgrid.innerHTML = '<span class="ghgrid-error">잔디를 불러오지 못했습니다</span>';
+      });
   }
 })();

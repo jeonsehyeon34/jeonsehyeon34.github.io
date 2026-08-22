@@ -279,19 +279,30 @@ header p{
   padding-bottom:18px;
   border-bottom:1px solid var(--border);
 }
-.ghchart-wrap{
-  width:100%;
+.ghgrid{
+  display:flex;
+  gap:3px;
   overflow-x:auto;
-  overflow-y:hidden;
-  border-radius:8px;
-  scrollbar-width:none;
 }
-.ghchart-wrap::-webkit-scrollbar{display:none;}
-.ghchart{
-  display:block;
-  width:320%;
-  max-width:none;
-  height:auto;
+.ghgrid-col{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+.ghgrid-cell{
+  width:11px;
+  height:11px;
+  border-radius:2.5px;
+  background:var(--border);
+  flex-shrink:0;
+}
+.ghgrid-cell.l1{background:#bcd8cd;}
+.ghgrid-cell.l2{background:var(--accent-2);}
+.ghgrid-cell.l3{background:var(--accent);}
+.ghgrid-cell.l4{background:var(--accent-strong);}
+.ghgrid-error{
+  font-size:11px;
+  color:var(--text-mute);
 }
 
 /* mini calendar */
