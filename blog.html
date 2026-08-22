@@ -103,14 +103,24 @@ layout: none
   <aside class="project-sidebar">
     <div class="sidebar-block">
       <p class="sidebar-title">GitHub 커밋</p>
-      <img class="ghchart" src="https://ghchart.rshah.org/2f5d50/jeonsehyeon34" alt="jeonsehyeon34의 GitHub 커밋 잔디">
+      <div class="ghchart-wrap">
+        <img class="ghchart" src="https://ghchart.rshah.org/2f5d50/jeonsehyeon34" alt="jeonsehyeon34의 GitHub 커밋 잔디">
+      </div>
     </div>
 
     <div class="sidebar-block">
-      <p class="sidebar-title">캘린더</p>
-      {% include mini-calendar.html year=2026 month=8 days=31 %}
-      {% include mini-calendar.html year=2026 month=9 days=30 %}
-      {% include mini-calendar.html year=2026 month=10 days=31 %}
+      <div class="mcal-header">
+        <p class="sidebar-title">캘린더</p>
+        <div class="mcal-nav">
+          <button type="button" class="mcal-arrow" data-dir="-1" aria-label="이전 달">‹</button>
+          <button type="button" class="mcal-arrow" data-dir="1" aria-label="다음 달">›</button>
+        </div>
+      </div>
+      <div class="mcal-viewport">
+        {% include mini-calendar.html year=2026 month=8 days=31 %}
+        {% include mini-calendar.html year=2026 month=9 days=30 %}
+        {% include mini-calendar.html year=2026 month=10 days=31 %}
+      </div>
     </div>
 
     <p class="sidebar-title">진행 중인 프로젝트</p>
