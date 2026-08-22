@@ -101,6 +101,18 @@ layout: none
   </div>
 
   <aside class="project-sidebar">
+    <div class="sidebar-block">
+      <p class="sidebar-title">GitHub 커밋</p>
+      <img class="ghchart" src="https://ghchart.rshah.org/2f5d50/jeonsehyeon34" alt="jeonsehyeon34의 GitHub 커밋 잔디">
+    </div>
+
+    <div class="sidebar-block">
+      <p class="sidebar-title">캘린더</p>
+      {% include mini-calendar.html year=2026 month=8 days=31 %}
+      {% include mini-calendar.html year=2026 month=9 days=30 %}
+      {% include mini-calendar.html year=2026 month=10 days=31 %}
+    </div>
+
     <p class="sidebar-title">진행 중인 프로젝트</p>
     {% for project in site.data.projects.items %}
       {% assign total = project.checklist.size %}

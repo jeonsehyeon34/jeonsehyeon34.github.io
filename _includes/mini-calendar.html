@@ -1,0 +1,43 @@
+{% assign month_pad = include.month | prepend: "00" | slice: -2, 2 %}
+{% assign month_first = include.year | append: "-" | append: month_pad | append: "-01" %}
+{% assign first_wday = month_first | date: "%w" | plus: 0 %}
+
+<div class="mcal">
+  <p class="mcal-title">{{ include.year }}.{{ month_pad }}</p>
+  <div class="mcal-grid">
+    <span class="mcal-dow">일</span><span class="mcal-dow">월</span><span class="mcal-dow">화</span><span class="mcal-dow">수</span><span class="mcal-dow">목</span><span class="mcal-dow">금</span><span class="mcal-dow">토</span>
+    {% for i in (1..first_wday) %}{% unless first_wday == 0 %}<span></span>{% endunless %}{% endfor %}
+    {% for d in (1..include.days) %}
+      {% assign day_pad = d | prepend: "00" | slice: -2, 2 %}
+      {% assign date_str = include.year | append: "-" | append: month_pad | append: "-" | append: day_pad %}
+      {% assign wday = date_str | date: "%w" %}
+
+      {% assign is_holiday = false %}
+      {% for h in site.data.holidays %}
+        {% if h.date == date_str %}{% assign is_holiday = true %}{% endif %}
+      {% endfor %}
+
+      {% assign has_post = false %}
+      {% for post in site.posts %}
+        {% assign post_date_str = post.date | date: "%Y-%m-%d" %}
+        {% if post_date_str == date_str %}{% assign has_post = true %}{% endif %}
+      {% endfor %}
+
+      {% assign is_red = false %}
+      {% if wday == "0" or is_holiday %}{% assign is_red = true %}{% endif %}
+
+      {% assign plan_start_str = site.data.plan.start_date | date: "%Y-%m-%d" %}
+      {% assign is_start = false %}
+      {% if date_str == plan_start_str %}{% assign is_start = true %}{% endif %}
+
+      {% assign title_text = "" %}
+      {% if is_start %}
+        {% assign title_text = "스터디 시작일" %}
+      {% elsif is_holiday %}
+        {% for h in site.data.holidays %}{% if h.date == date_str %}{% assign title_text = h.name %}{% endif %}{% endfor %}
+      {% endif %}
+
+      <span class="mcal-day{% if is_red %} red{% else %} blue{% endif %}{% if is_start %} start{% elsif has_post %} on{% endif %}"{% if title_text != "" %} title="{{ title_text }}"{% endif %}>{{ d }}</span>
+    {% endfor %}
+  </div>
+</div>

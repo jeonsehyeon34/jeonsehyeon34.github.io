@@ -107,7 +107,7 @@ header p{
   margin:0 auto;
   padding:0 20px 90px;
   display:grid;
-  grid-template-columns:1fr 250px;
+  grid-template-columns:1fr 300px;
   gap:24px;
   align-items:start;
 }
@@ -274,6 +274,58 @@ header p{
 .sidebar-project-meta{
   font-size:11px;
   color:var(--text-mute);
+}
+
+.sidebar-block{
+  margin-bottom:18px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--border);
+}
+.ghchart{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* mini calendar */
+.mcal{margin-bottom:10px;}
+.mcal:last-child{margin-bottom:0;}
+.mcal-title{
+  font-size:11px;
+  font-weight:700;
+  color:var(--text-sub);
+  margin:0 0 6px;
+}
+.mcal-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:2px;
+}
+.mcal-dow{
+  font-size:9.5px;
+  color:var(--text-mute);
+  text-align:center;
+  padding-bottom:2px;
+}
+.mcal-day{
+  aspect-ratio:1/1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10.5px;
+  border-radius:4px;
+}
+.mcal-day.blue{color:#4a6a8a;}
+.mcal-day.red{color:#b5533f;}
+.mcal-day.on{
+  background:var(--accent);
+  color:#fff;
+  font-weight:700;
+}
+.mcal-day.start{
+  background:#e8b923;
+  color:#3d2b00;
+  font-weight:700;
 }
 
 @media (max-width:720px){
